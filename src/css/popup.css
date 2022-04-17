@@ -1,0 +1,58 @@
+*, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.counter {
+    position: relative;
+    width: 300px;
+    height: 300px;
+  }
+  
+  .counter__svg {
+    transform: scaleX(-1);
+  }
+  
+  .counter__circle {
+    fill: none;
+    stroke: none;
+  }
+  
+  .counter__path-elapsed {
+    stroke-width: 7px;
+    stroke: grey;
+  }
+  
+  .counter__path-remaining {
+    stroke-width: 7px;
+    stroke-linecap: round;
+    transform: rotate(90deg);
+    transform-origin: center;
+    transition: 1s linear all;
+    fill-rule: nonzero;
+    stroke: currentColor;
+  }
+  
+  .counter__path-remaining.green {
+    color: rgb(65, 184, 131);
+  }
+  
+  .counter__path-remaining.orange {
+    color: orange;
+  }
+  
+  .counter__path-remaining.red {
+    color: red;
+  }
+  
+  .counter__label {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+  }

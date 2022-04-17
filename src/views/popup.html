@@ -4,9 +4,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="../css/popup.css">
+    <title>Health reminder for developer</title>
 </head>
 <body>
-    <p>aslkdjaskld</p>
+    <div class="app">
+        <div class="counter">
+            <svg class="counter__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <g class="counter__circle">
+                  <circle class="counter__path-elapsed" cx="50" cy="50" r="45"></circle>
+                  <path
+                    id="counter-path-remaining"
+                    stroke-dasharray="45 283"
+                    class="counter__path-remaining ${remainingPathColor}"
+                    d="
+                      M 50, 50
+                      m -45, 0
+                      a 45,45 0 1,0 90,0
+                      a 45,45 0 1,0 -90,0
+                    "
+                  ></path>
+                </g>
+            </svg>
+        </div>
+    </div>
+    <!--scripts-->
+    <script src="../js/foreground.js" defer></script>
 </body>
 </html>
