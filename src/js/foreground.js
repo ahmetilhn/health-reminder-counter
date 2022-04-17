@@ -3,10 +3,10 @@ let timerConstant = {
   start: false,
   //type of miliseconds
   fullDash: 283,
-  timeLimit: 10,
-  timeLeft: 10,
+  timeLimit: 200000,
+  timeLeft: 200000,
   //per of second
-  per: 1,
+  per: 1000,
   //timer function
   timerInterval: null,
 };
@@ -24,6 +24,7 @@ const colorLimits = {
 const elems = {
   counterCircle: document.getElementById("counter-path-remaining"),
   startButton: document.getElementById("start_button"),
+  timeRemainingText: document.getElementById("time_remaining_text"),
 };
 
 
@@ -36,14 +37,20 @@ function calculateTimeFraction() {
 }
 //update counter circle width
 const updateCounterCircle = () => {
-    timerConstant.timerInterval = setInterval(() => {
-      timerConstant.timeLeft = timerConstant.timeLeft - timerConstant.per;
-      remainingTimeColor(timerConstant.timeLeft);
-      const circleDasharray = `${(
-        calculateTimeFraction() * timerConstant.fullDash
-      ).toFixed(0)} 283`;
-      elems.counterCircle.setAttribute("stroke-dasharray", circleDasharray);
-    }, 1000);
+      timerConstant.timerInterval = setInterval(() => {
+       if(timerConstant.timeLeft > 0){
+        timerConstant.timeLeft = timerConstant.timeLeft - timerConstant.per;
+        remainingTimeColor(timerConstant.timeLeft);
+        remainingTimeText(timerConstant.timeLeft);
+        const circleDasharray = `${(
+          calculateTimeFraction() * timerConstant.fullDash
+        ).toFixed(0)} 283`;
+        elems.counterCircle.setAttribute("stroke-dasharray", circleDasharray);
+       }
+       else {
+         resetCounter();
+       }
+      }, 1000);
 };
 //update time circle color
 const remainingTimeColor = (timeLeft) => {
@@ -54,7 +61,18 @@ const remainingTimeColor = (timeLeft) => {
   }
 };
 
-
+const remainingTimeText = (time) => {
+  let min, sec;
+  min = Math.floor(time / (60 * 1000));
+  if(min < 10){
+    min = `0${min}`
+  }
+  sec = Math.floor((time / 1000) % 60);
+  if(sec < 10){
+    sec = `0${sec}`
+  }
+  elems.timeRemainingText.innerHTML = min + ':' + sec;
+}
 //start timer after click
 const startTimer = () => {
   updateCounterCircle();
@@ -67,15 +85,17 @@ const resetCounter = () => {
     start: false,
     //type of miliseconds
     fullDash: 283,
-    timeLimit: 100,
-    timeLeft: 100,
+    timeLimit: 5000,
+    timeLeft: 5000,
     //per of second
-    per: 1,
+    per: 1000,
     //timer function
     timerInterval: null,
   };
   //reset circle width
-  elems.counterCircle.setAttribute("stroke-dasharray", "283")
+  elems.counterCircle.setAttribute("stroke-dasharray", "283");
+  elems.counterCircle.classList.add("green");
+  elems.counterCircle.classList.remove("orange", "red");
 };
 //after page uploaded
 elems.startButton.addEventListener("click", () => {

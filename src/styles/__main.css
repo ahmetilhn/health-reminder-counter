@@ -78,7 +78,7 @@ body {
 }
 
 .counter__path-elapsed {
-  stroke-width: 7px;
+  stroke-width: 2px;
   stroke: grey;
 }
 
@@ -93,15 +93,15 @@ body {
 }
 
 .counter__path-remaining.green {
-  color: #69ff9b;
-}
-
-.counter__path-remaining.red {
-  color: red;
+  stroke: #32d669;
 }
 
 .counter__path-remaining.orange {
-  color: orange;
+  stroke: orange;
+}
+
+.counter__path-remaining.red {
+  stroke: red;
 }
 
 .counter__remaining-time-text {

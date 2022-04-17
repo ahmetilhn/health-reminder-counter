@@ -58,7 +58,7 @@ body {
   }
   &__path {
     &-elapsed {
-      stroke-width: 7px;
+      stroke-width: 2px;
       stroke: grey;
     }
     &-remaining {
@@ -69,14 +69,16 @@ body {
       transition: 0.4s linear all;
       fill-rule: nonzero;
       stroke: $dark-one;
+
       &.green {
-        color: $green;
+        stroke: $green-dark;
+      }
+
+      &.orange {
+        stroke: $orange;
       }
       &.red {
-        color: $red;
-      }
-      &.orange {
-        color: $orange;
+        stroke: $red;
       }
     }
   }
