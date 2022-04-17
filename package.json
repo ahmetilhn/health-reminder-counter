@@ -6,8 +6,5 @@
   "author": "Ahmet ilhan <ahmetilhan.dev@gmail.com>",
   "license": "MIT",
   "private": false,
-  "dependencies": {
-    "gulp": "^4.0.2",
-    "gulp-sass": "^5.1.0"
-  }
+  "dependencies": {}
 }
