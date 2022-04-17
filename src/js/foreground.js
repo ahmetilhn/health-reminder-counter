@@ -46,9 +46,7 @@ const updateCounterCircle = () => {
     elems.counterCircle.setAttribute("stroke-dasharray", circleDasharray);
   }, 1000);
 };
-const startTimer = () => {
-  updateCounterCircle();
-};
+//update time circle color
 const remainingTimeColor = (timeLeft) => {
   console.log(timeLeft, colorLimits.danger.limit);
   if (colorLimits.danger.limit > timeLeft) {
@@ -57,6 +55,10 @@ const remainingTimeColor = (timeLeft) => {
   else if(colorLimits.info.limit > timeLeft){
     elems.counterCircle.classList.add('orange');
   }
+};
+//start timer after click
+const startTimer = () => {
+  updateCounterCircle();
 };
 //after page uploaded
 elems.startButton.addEventListener("click", () => {

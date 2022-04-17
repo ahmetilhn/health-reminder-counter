@@ -3,7 +3,22 @@
     padding: 0;
     box-sizing: border-box;
 }
-
+:root {
+  --green-dark: #32d669;
+  --green: #69ff9b;
+  --dark-one: #2d354f;
+}
+.app {
+  width: 100%
+}
+.header {
+  width: 100%;
+  height: 40px;
+  border-bottom: 1px solid var(--dark-one);
+}
+.header__logo { 
+  width: 30px;
+}
 .counter {
     position: relative;
     width: 300px;

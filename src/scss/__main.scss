@@ -1,0 +1,68 @@
+*,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+$green-dark: #32d669;
+$green: #69ff9b;
+$dark-one: #2d354f;
+$orange: orange;
+$red: red;
+.app {
+  width: 100%;
+}
+.header {
+  width: 100%;
+  height: 40px;
+  border-bottom: 1px solid var(--dark-one);
+  &__logo {
+    width: 30px;
+  }
+}
+.counter {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  &__svg {
+    transform: scaleX(-1);
+  }
+  &__circle {
+    fill: none;
+    stroke: none;
+  }
+  &__label {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+  }
+  &__path {
+    &-elapsed {
+      stroke-width: 7px;
+      stroke: grey;
+    }
+    &-remaining {
+      stroke-width: 7px;
+      stroke-linecap: round;
+      transform: rotate(90deg);
+      transform-origin: center;
+      transition: 0.2s linear all;
+      fill-rule: nonzero;
+      stroke: currentColor;
+      &.green {
+        color: $green;
+      }
+      &.red {
+        color: $red;
+      }
+      &.orange: {
+        color: $orange;
+      }
+    }
+  }
+}

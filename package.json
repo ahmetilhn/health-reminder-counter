@@ -1,0 +1,13 @@
+{
+  "name": "health-reminder-extension-chrome",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/ahmetilhan24/health-reminder-extension-chrome.git",
+  "author": "Ahmet ilhan <ahmetilhan.dev@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "gulp": "^4.0.2",
+    "gulp-sass": "^5.1.0"
+  }
+}
