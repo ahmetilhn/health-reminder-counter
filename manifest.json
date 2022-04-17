@@ -10,7 +10,9 @@
         "default_title": "Chrome extension",
         "default_popup": "src/views/popup.html"
     },
-    "permissions": [],
+    "permissions": [
+        "storage"
+    ],
     "host_permissions": [
         "*://*/*"
     ],

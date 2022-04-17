@@ -43,6 +43,8 @@ const updateCounterCircle = () => {
         timerConstant.timeLeft = timerConstant.timeLeft - timerConstant.per;
         remainingTimeColor(timerConstant.timeLeft);
         remainingTimeText(timerConstant.timeLeft);
+        //set local storage
+        setStorage();
         const circleDasharray = `${(
           calculateTimeFraction() * timerConstant.fullDash
         ).toFixed(0)} 283`;
@@ -80,6 +82,7 @@ const startTimer = () => {
 };
 //reset counter
 const resetCounter = () => {
+  getStorage();
   window.clearInterval(timerConstant.timerInterval);
   //reset updated variables
   timerConstant = {
@@ -98,7 +101,20 @@ const resetCounter = () => {
   elems.counterCircle.classList.add("green");
   elems.counterCircle.classList.remove("orange", "red");
 };
-//after page uploaded
+//set local storage
+const setStorage = () => {
+  // Save it using the Chrome extension storage API.
+  chrome.storage.sync.set({'timeLeft': timerConstant.timeLeft, 'oldDate': new Date().getTime()}, () =>{
+  });
+}
+const getStorage = () => {
+   chrome.storage.sync.get(['timeLeft', 'oldDate'], (result) => {
+     console.log(result.timeLeft)
+    timerConstant.timeLeft = result.timeLeft - (new Date().getTime() - result.oldDate);
+    initTimer();
+  });
+}
+//after click starter
 elems.startButton.addEventListener("click", () => {
   if (!timerConstant.start) {
     timerConstant.start = true;
@@ -111,3 +127,13 @@ elems.startButton.addEventListener("click", () => {
     }
   }
 });
+//init timer
+const initTimer = () => {
+  remainingTimeText(timerConstant.timeLeft);
+  startTimer();
+}
+//after page loaded
+// document.addEventListener("DOMContentLoaded", () => {
+//   getStorage();
+// })
+getStorage();
