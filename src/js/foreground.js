@@ -1,9 +1,10 @@
 //timer constant for timer
 const timerConstant = {
+  start: false,
   //type of miliseconds
   fullDash: 283,
-  timeLimit: 10,
-  timeLeft: 10,
+  timeLimit: 100,
+  timeLeft: 100,
   //per of second
   per: 1,
   //timer function

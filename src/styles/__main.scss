@@ -1,34 +1,49 @@
+
+//imports
+@import "./_colors.scss";
+@import "./_classes.scss";
+@import url('https://fonts.googleapis.com/css2?family=ZCOOL+QingKe+HuangYou&display=swap');
 *,
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  color: $dark-one;
 }
-$green-dark: #32d669;
-$green: #69ff9b;
-$dark-one: #2d354f;
-$orange: orange;
-$red: red;
 .app {
+  width: 400px;
+  height: 100%;
+  border: 2px solid $dark-one;
+}
+.content {
   width: 100%;
+  padding: 10px 0 20px 0;
 }
 .header {
   width: 100%;
-  height: 40px;
-  border-bottom: 1px solid var(--dark-one);
+  height: 50px;
+  border-bottom: 1px solid;
+  padding: 0 10px;
+  justify-content: space-between !important;
   &__logo {
     width: 30px;
   }
 }
 .counter {
   position: relative;
-  width: 300px;
-  height: 300px;
+  width: 140px;
+  height: 140px;
+  margin: 30px 0;
+  transition: .2s ease;
+  cursor: pointer;
+  &:hover{
+    transform: scale(1.1);
+  }
   &__svg {
     transform: scaleX(-1);
   }
   &__circle {
-    fill: none;
+    fill: white;
     stroke: none;
   }
   &__label {
@@ -53,7 +68,7 @@ $red: red;
       transform-origin: center;
       transition: 0.2s linear all;
       fill-rule: nonzero;
-      stroke: currentColor;
+      stroke: $dark-one;
       &.green {
         color: $green;
       }
@@ -64,5 +79,14 @@ $red: red;
         color: $orange;
       }
     }
+  }
+  &__remaining-time-text{ 
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    font-size: 24px;
+    color: $dark-one;
   }
 }
