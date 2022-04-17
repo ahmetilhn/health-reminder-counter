@@ -13,6 +13,13 @@
   align-items: center;
 }
 
+@keyframes rippleEffect {
+  to {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
 *,
 body {
   margin: 0;
@@ -57,6 +64,30 @@ body {
   transform: scale(1.1);
 }
 
+.counter__ripple {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #32d669;
+  opacity: 0.5;
+  animation: rippleEffect 1s ease-out infinite;
+}
+
+.counter__ripple.green {
+  background-color: #32d669;
+}
+
+.counter__ripple.orange {
+  background-color: orange;
+}
+
+.counter__ripple.red {
+  background-color: red;
+}
+
 .counter__svg {
   transform: scaleX(-1);
 }
@@ -79,7 +110,7 @@ body {
 
 .counter__path-elapsed {
   stroke-width: 2px;
-  stroke: grey;
+  stroke: #2d354f;
 }
 
 .counter__path-remaining {
@@ -89,7 +120,8 @@ body {
   transform-origin: center;
   transition: 0.4s linear all;
   fill-rule: nonzero;
-  stroke: #2d354f;
+  stroke: #32d669;
+  fill: #2d354f;
 }
 
 .counter__path-remaining.green {
@@ -110,6 +142,6 @@ body {
   top: 50%;
   transform: translate(-50%, -50%);
   font-family: 'ZCOOL QingKe HuangYou', cursive;
-  font-size: 24px;
-  color: #2d354f;
+  font-size: 27px;
+  color: white;
 }

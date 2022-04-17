@@ -23,9 +23,10 @@ const colorLimits = {
 };
 //elems(html) of counts
 const elems = {
-  counterCircle: document.getElementById("counter-path-remaining"),
+  counterCircle: document.getElementById("counter_path_remaining"),
   startButton: document.getElementById("start_button"),
   timeRemainingText: document.getElementById("time_remaining_text"),
+  counterRipple: document.getElementById("counter_ripple")
 };
 
 
@@ -59,7 +60,9 @@ const updateCounterCircle = () => {
 const remainingTimeColor = (timeLeft) => {
   if (colorLimits.danger.limit > timeLeft) {
     elems.counterCircle.classList.add("red");
+    elems.counterRipple.classList.add("red");
   } else if (colorLimits.info.limit > timeLeft) {
+    elems.counterRipple.classList.add("orange");
     elems.counterCircle.classList.add("orange");
   }
 };

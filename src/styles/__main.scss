@@ -2,6 +2,7 @@
 //imports
 @import "./_colors.scss";
 @import "./_classes.scss";
+@import "./_animations.scss";
 @import url('https://fonts.googleapis.com/css2?family=ZCOOL+QingKe+HuangYou&display=swap');
 *,
 body {
@@ -39,6 +40,27 @@ body {
   &:hover{
     transform: scale(1.1);
   }
+  &__ripple {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: $green-dark;
+    opacity: 0.5;
+    animation: rippleEffect 1s ease-out infinite;
+    &.green {
+      background-color: $green-dark;
+    }
+
+    &.orange {
+      background-color: $orange;
+    }
+    &.red {
+      background-color: $red;
+    }
+  }
   &__svg {
     transform: scaleX(-1);
   }
@@ -59,7 +81,7 @@ body {
   &__path {
     &-elapsed {
       stroke-width: 2px;
-      stroke: grey;
+      stroke: $dark-one;
     }
     &-remaining {
       stroke-width: 7px;
@@ -68,8 +90,8 @@ body {
       transform-origin: center;
       transition: 0.4s linear all;
       fill-rule: nonzero;
-      stroke: $dark-one;
-
+      stroke: $green-dark;
+      fill: $dark-one;
       &.green {
         stroke: $green-dark;
       }
@@ -88,7 +110,7 @@ body {
     top: 50%;
     transform: translate(-50%, -50%);
     font-family: 'ZCOOL QingKe HuangYou', cursive;
-    font-size: 24px;
-    color: $dark-one;
+    font-size: 27px;
+    color: white;
   }
 }
