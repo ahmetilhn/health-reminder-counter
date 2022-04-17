@@ -1,0 +1,24 @@
+{
+    "manifest_version": 3,
+    "name": "Chrome Extension v3 Starter",
+    "description": "A minimal example of a chrome extension using manifest v3",
+    "version": "1.0.0",
+    "icons": {
+        "32": "assets/32.png"
+    },
+    "action": {
+        "default_title": "Chrome extension",
+        "default_popup": "src/views/popup.html"
+    },
+    "permissions": [],
+    "host_permissions": [
+        "*://*/*"
+    ],
+    "background": {
+        "service_worker": "src/js/service-worker.js"
+    },
+    "content_scripts": [{
+        "js": ["src/js/foreground.js"],
+        "matches": ["https://github.com/*"]
+    }]
+}
