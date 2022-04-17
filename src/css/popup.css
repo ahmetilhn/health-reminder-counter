@@ -29,7 +29,7 @@
     stroke-linecap: round;
     transform: rotate(90deg);
     transform-origin: center;
-    transition: 1s linear all;
+    transition: .2s linear all;
     fill-rule: nonzero;
     stroke: currentColor;
   }
