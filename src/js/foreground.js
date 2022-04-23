@@ -4,8 +4,8 @@ let timerConstant = {
   //type of miliseconds
   fullDash: 283,
   //Bir insan bilgisayar başında 1 saate 10 dk mola vermelidir
-  timeLimit: 10000,
-  timeLeft: 10000,
+  timeLimit: 100000,
+  timeLeft: 100000,
   //per of second
   per: 1000,
   //timer function
@@ -89,8 +89,8 @@ const resetCounter = () => {
     start: false,
     //type of miliseconds
     fullDash: 283,
-    timeLimit: 10000,
-    timeLeft: 10000,
+    timeLimit: 3600000,
+    timeLeft: 3600000,
     //per of second
     per: 1000,
     //timer function
