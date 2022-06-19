@@ -2,8 +2,8 @@
 let timerConstant = {
   start: false,
   //Bir insan bilgisayar başında 1 saate 10 dk mola vermelidir
-  timeLimit: 10000,
-  timeLeft: 10000,
+  timeLimit: 3000000,
+  timeLeft: 3000000,
   //per of second
   per: 1000,
   //timer function
@@ -97,8 +97,8 @@ const resetCounter = () => {
   //reset updated variables
   timerConstant = {
     start: false,
-    timeLimit: 10000,
-    timeLeft: 10000,
+    timeLimit: 3000000,
+    timeLeft: 3000000,
     //per of second
     per: 1000,
     //timer function
