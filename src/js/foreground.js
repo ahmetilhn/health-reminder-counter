@@ -27,7 +27,8 @@ const svgConstants = {
 const elems = {
   counterCircle: document.getElementById("counter_path_remaining"),
   startButton: document.getElementById("start_button"),
-  stopButton: document.getElementById("stop_button"),
+  pauseButton: document.getElementById("pause_button"),
+  resetButton: document.getElementById("reset_button"),
   timeRemainingText: document.getElementById("time_remaining_text"),
   counterRipple: document.getElementById("counter_ripple"),
 };
@@ -44,13 +45,9 @@ const updateCounterCircle = () => {
   timerConstant.timerInterval = setInterval(() => {
     if (timerConstant.timeLeft > 0) {
       timerConstant.timeLeft = timerConstant.timeLeft - timerConstant.per;
-      remainingTimeColor(timerConstant.timeLeft);
-      remainingTimeText(timerConstant.timeLeft);
-      // For circle style
-      const circleDasharray = `${(
-        calculateTimeFraction() * svgConstants.fullDash
-      ).toFixed(0)} 283`;
-      elems.counterCircle.setAttribute("stroke-dasharray", circleDasharray);
+      remainingTimeColor();
+      remainingTimeText();
+      remainingTimeCircle();
       //set local storage
       setStorage(timerConstant.timeLeft);
     } else {
@@ -58,29 +55,37 @@ const updateCounterCircle = () => {
     }
   }, timerConstant.per);
 };
+// update time circle stroke
+const remainingTimeCircle = () => {
+  // For circle style
+  const circleDasharray = `${(
+    calculateTimeFraction() * svgConstants.fullDash
+  ).toFixed(0)} ${svgConstants.fullDash}`;
+  elems.counterCircle.setAttribute("stroke-dasharray", circleDasharray);
+};
 //update time circle color
-const remainingTimeColor = (timeLeft) => {
+const remainingTimeColor = () => {
   //reset circle width
   elems.counterCircle.setAttribute("stroke-dasharray", svgConstants.fullDash);
   elems.counterCircle.classList.add("green");
   elems.counterCircle.classList.remove("orange", "red");
   elems.counterRipple.classList.remove("orange", "red");
-  if (colorLimits.danger.limit > timeLeft) {
+  if (colorLimits.danger.limit > timerConstant.timeLeft) {
     elems.counterCircle.classList.add("red");
     elems.counterRipple.classList.add("red");
-  } else if (colorLimits.info.limit > timeLeft) {
+  } else if (colorLimits.info.limit > timerConstant.timeLeft) {
     elems.counterRipple.classList.add("orange");
     elems.counterCircle.classList.add("orange");
   }
 };
 
-const remainingTimeText = (time) => {
+const remainingTimeText = () => {
   let min, sec;
-  min = Math.floor(time / (60 * 1000));
+  min = Math.floor(timerConstant.timeLeft / (60 * 1000));
   if (min < 10) {
     min = `0${min}`;
   }
-  sec = Math.floor((time / 1000) % 60);
+  sec = Math.floor((timerConstant.timeLeft / 1000) % 60);
   if (sec < 10) {
     sec = `0${sec}`;
   }
@@ -100,19 +105,20 @@ const resetCounter = () => {
     timerInterval: null,
   };
   resetStorage();
-  remainingTimeText(timerConstant.timeLeft);
-  remainingTimeColor(timerConstant.timeLeft);
+  remainingTimeText();
+  remainingTimeColor();
 };
 // reset storage
 const resetStorage = () => {
   chrome.storage.sync.clear();
 };
 //set local storage
-const setStorage = (timeLeft) => {
+const setStorage = () => {
   // Save it using the Chrome extension storage API.
   chrome.storage.sync.set({
-    timeLeft: timeLeft,
+    timeLeft: timerConstant.timeLeft,
     oldDate: new Date().getTime(),
+    start: timerConstant.start,
   });
 };
 const getStorage = () => {
@@ -121,22 +127,33 @@ const getStorage = () => {
       timerConstant.start = true;
       timerConstant.timeLeft =
         result.timeLeft - (new Date().getTime() - result.oldDate);
-      initTimer();
+      initTimer(timerConstant.timeLeft);
+    } else {
+      console.log("storage yok");
     }
   });
 };
 //start timer after click
 const startTimer = () => {
+  timerConstant.start = true;
   updateCounterCircle();
 };
-const stopTimer = () => {
+const pauseTimer = () => {
   timerConstant.start = false;
+  elems.pauseButton.innerHTML = "Play";
+  window.clearInterval(timerConstant.timerInterval);
+  setStorage();
+};
+const playTimer = () => {
+  timerConstant.start = true;
+  elems.pauseButton.innerHTML = "Pause";
+  startTimer();
 };
 //init timer
 const initTimer = () => {
-  updateCounterCircle();
-  remainingTimeText(timerConstant.timeLeft);
-  remainingTimeColor(timerConstant.timeLeft);
+  remainingTimeCircle();
+  remainingTimeText();
+  remainingTimeColor();
 };
 //after page loaded
 document.addEventListener("DOMContentLoaded", () => {
@@ -145,7 +162,14 @@ document.addEventListener("DOMContentLoaded", () => {
 //after click starter
 elems.startButton.addEventListener("click", () => {
   if (!timerConstant.start) {
-    timerConstant.start = true;
     startTimer();
+  }
+});
+//stop timer
+elems.pauseButton.addEventListener("click", () => {
+  if (timerConstant.start) {
+    pauseTimer();
+  } else {
+    playTimer();
   }
 });

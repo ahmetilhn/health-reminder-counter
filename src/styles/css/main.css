@@ -129,7 +129,7 @@ body {
   justify-content: space-between; }
   .control-area .btn {
     width: 48%; }
-    .control-area .btn.stop {
+    .control-area .btn.pause {
       background-color: orange; }
     .control-area .btn.reset {
       background-color: red; }
