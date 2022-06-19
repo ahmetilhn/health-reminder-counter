@@ -10,3 +10,11 @@
   justify-content: center;
   align-items: center;
 }
+.btn {
+  border: none;
+  padding: 12px;
+  border-radius: 4px;
+  color: $white;
+  font-size: 15px;
+  cursor: pointer;
+}

@@ -22,11 +22,21 @@ body {
 .header {
   width: 100%;
   height: 50px;
-  border-bottom: 2px solid;
+  border-bottom: 2px solid $dark-one;
   padding: 0 10px;
   justify-content: space-between !important;
   &__logo {
     width: 30px;
+  }
+}
+.footer {
+  width: 100%;
+  height: 30px;
+  padding: 0 10px;
+  border-top: 2px solid $gray-one;
+  .author {
+    font-size: 10px;
+    color: $gray-one;
   }
 }
 .counter {
@@ -110,5 +120,20 @@ body {
     font-family: "ZCOOL QingKe HuangYou", cursive;
     font-size: 27px;
     color: $dark-one;
+  }
+}
+
+.control-area {
+  width: 100%;
+  padding: 0 10px;
+  justify-content: space-between;
+  .btn {
+    width: 48%;
+    &.stop {
+      background-color: $orange;
+    }
+    &.reset {
+      background-color: $red;
+    }
   }
 }
