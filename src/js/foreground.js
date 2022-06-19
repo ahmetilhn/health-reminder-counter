@@ -139,6 +139,7 @@ const getStorage = () => {
 //start timer after click
 const startTimer = () => {
   timeInterval();
+  pausePlayControl();
 };
 const pauseTimer = () => {
   timerConstant.start = false;
