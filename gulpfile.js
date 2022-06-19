@@ -5,13 +5,13 @@ const sass = require("gulp-sass");
 //sass convertor and watch
 gulp.task("sass", () => {
   return gulp
-    .src(["src/styles/style.scss", "assets/sass/responsive.scss"])
+    .src("src/styles/sass/main.scss")
     .pipe(sass())
-    .pipe(gulp.dest("assets/css"));
+    .pipe(gulp.dest("src/styles/css"));
 });
 
 gulp.task("watch", () => {
-  gulp.watch("assets/sass/*.scss", gulp.series("sass"));
+  gulp.watch("src/styles/sass/*.scss", gulp.series("sass"));
 });
 
 gulp.task("default", gulp.series("watch"));

@@ -1,9 +1,8 @@
-
 //imports
-@import "./_colors.scss";
-@import "./_classes.scss";
-@import "./_animations.scss";
-@import url('https://fonts.googleapis.com/css2?family=ZCOOL+QingKe+HuangYou&display=swap');
+@import "./colors.scss";
+@import "./classes.scss";
+@import "./animations.scss";
+@import url("https://fonts.googleapis.com/css2?family=ZCOOL+QingKe+HuangYou&display=swap");
 *,
 body {
   margin: 0;
@@ -35,9 +34,9 @@ body {
   width: 140px;
   height: 140px;
   margin: 30px 0;
-  transition: .2s ease;
+  transition: 0.2s ease;
   cursor: pointer;
-  &:hover{
+  &:hover {
     transform: scale(1.1);
   }
   &__ripple {
@@ -104,12 +103,12 @@ body {
       }
     }
   }
-  &__remaining-time-text{ 
+  &__remaining-time-text {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    font-family: "ZCOOL QingKe HuangYou", cursive;
     font-size: 27px;
     color: white;
   }
