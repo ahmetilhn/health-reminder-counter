@@ -1,17 +1,18 @@
 {
     "manifest_version": 3,
-    "name": "Chrome Extension v3 Starter",
-    "description": "A minimal example of a chrome extension using manifest v3",
-    "version": "1.0.0",
+    "name": "Health reminder counter",
+    "description": "With this counter,computer enginers can leave the computer in 50-minute parts. It will prevent the harms of continuous work on health.",
+    "version": "1.0",
     "icons": {
-        "32": "assets/32.png"
+        "32": "assets/img/32.png"
     },
     "action": {
-        "default_title": "Chrome extension",
+        "default_title": "Health Reminder Counter",
         "default_popup": "src/views/popup.html"
     },
     "permissions": [
-        "storage", "notifications"
+        "storage",
+        "notifications"
     ],
     "host_permissions": [
         "*://*/*"
@@ -19,8 +20,14 @@
     "background": {
         "service_worker": "src/js/service-worker.js"
     },
-    "content_scripts": [{
-        "js": ["src/js/foreground.js"],
-        "matches": ["https://github.com/*"]
-    }]
+    "content_scripts": [
+        {
+            "js": [
+                "src/js/foreground.js"
+            ],
+            "matches": [
+                "https://github.com/*"
+            ]
+        }
+    ]
 }
