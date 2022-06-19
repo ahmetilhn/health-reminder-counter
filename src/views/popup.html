@@ -1,45 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../styles/css/__main.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../styles/css/main.css" />
     <title>Health reminder for developer</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="app">
       <header class="header flex-row-center">
-        <img class="header__logo" src="../../assets/32.svg" alt="Logo">
+        <img class="header__logo" src="../../assets/32.svg" alt="Logo" />
         <span>v1.0.0</span>
       </header>
-        <main class="content flex-column-center">
-          <div class="counter" id="start_button">
-            <div class="counter__ripple green" id="counter_ripple"></div>
-              <svg class="counter__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                  <g class="counter__circle">
-                    <circle class="counter__path-elapsed" cx="50" cy="50" r="45"></circle>
-                    <path
-                      id="counter_path_remaining"
-                      stroke-dasharray="283 283"
-                      class="counter__path-remaining"
-                      d="
+      <main class="content flex-column-center">
+        <div class="counter" id="start_button">
+          <div class="counter__ripple green" id="counter_ripple"></div>
+          <svg
+            class="counter__svg"
+            viewBox="0 0 100 100"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g class="counter__circle">
+              <circle
+                class="counter__path-elapsed"
+                cx="50"
+                cy="50"
+                r="45"
+              ></circle>
+              <path
+                id="counter_path_remaining"
+                stroke-dasharray="283 283"
+                class="counter__path-remaining"
+                d="
                         M 50, 50
                         m -45, 0
                         a 45,45 0 1,0 90,0
                         a 45,45 0 1,0 -90,0
                       "
-                    ></path>
-                  </g>
-              </svg>
-              <span class="counter__remaining-time-text" id="time_remaining_text">50:00</span>
-          </div>
-          <!--control area-->
-          <div class="control-area">
-          </div>
-        </main>
+              ></path>
+            </g>
+          </svg>
+          <span class="counter__remaining-time-text" id="time_remaining_text"
+            >50:00</span
+          >
+        </div>
+        <!--control area-->
+        <div class="control-area"></div>
+      </main>
     </div>
     <!--scripts-->
     <script src="../js/foreground.js" defer></script>
-</body>
+  </body>
 </html>

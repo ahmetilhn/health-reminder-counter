@@ -11,7 +11,7 @@ body {
   color: $dark-one;
 }
 .app {
-  width: 400px;
+  width: 320px;
   height: 100%;
   border: 2px solid $dark-one;
 }
@@ -22,7 +22,7 @@ body {
 .header {
   width: 100%;
   height: 50px;
-  border-bottom: 1px solid;
+  border-bottom: 2px solid;
   padding: 0 10px;
   justify-content: space-between !important;
   &__logo {
@@ -46,7 +46,6 @@ body {
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background-color: $green-dark;
     opacity: 0.5;
     animation: rippleEffect 1s ease-out infinite;
     &.green {
@@ -90,7 +89,7 @@ body {
       transition: 0.4s linear all;
       fill-rule: nonzero;
       stroke: $green-dark;
-      fill: $dark-one;
+      fill: $white;
       &.green {
         stroke: $green-dark;
       }
@@ -110,6 +109,6 @@ body {
     transform: translate(-50%, -50%);
     font-family: "ZCOOL QingKe HuangYou", cursive;
     font-size: 27px;
-    color: white;
+    color: $dark-one;
   }
 }
