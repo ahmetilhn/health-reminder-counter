@@ -16,11 +16,7 @@
       <main class="content flex-column-center">
         <div class="counter" id="start_button">
           <div class="counter__ripple green" id="counter_ripple"></div>
-          <svg
-            class="counter__svg"
-            viewBox="0 0 100 100"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+          <svg class="counter__svg" viewBox="0 0 100 100">
             <g class="counter__circle">
               <circle
                 class="counter__path-elapsed"
@@ -47,13 +43,13 @@
         </div>
         <!--control area-->
         <div class="control-area flex-row-center">
-          <button class="reset btn">Reset</button>
-          <button class="stop btn">Stop</button>
+          <button class="reset btn" id="reset_button">Reset</button>
+          <button class="pause btn" id="pause_button">Pause</button>
         </div>
       </main>
       <footer class="footer flex-row-center">
         <p class="author">
-          Powered by <a href="https://github.com/ahmetilhan24">Ahmet ilhan</a>
+          Author by <a href="https://github.com/ahmetilhan24">Ahmet ilhan</a>
         </p>
       </footer>
     </div>

@@ -96,7 +96,7 @@ body {
       stroke-linecap: round;
       transform: rotate(90deg);
       transform-origin: center;
-      transition: 0.4s linear all;
+      transition: 0.2s linear all;
       fill-rule: nonzero;
       stroke: $green-dark;
       fill: $white;
@@ -129,7 +129,7 @@ body {
   justify-content: space-between;
   .btn {
     width: 48%;
-    &.stop {
+    &.pause {
       background-color: $orange;
     }
     &.reset {

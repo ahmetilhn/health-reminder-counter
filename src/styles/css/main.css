@@ -104,7 +104,7 @@ body {
     stroke-linecap: round;
     transform: rotate(90deg);
     transform-origin: center;
-    transition: 0.4s linear all;
+    transition: 0.2s linear all;
     fill-rule: nonzero;
     stroke: #32d669;
     fill: #fff; }
@@ -129,7 +129,7 @@ body {
   justify-content: space-between; }
   .control-area .btn {
     width: 48%; }
-    .control-area .btn.stop {
+    .control-area .btn.pause {
       background-color: orange; }
     .control-area .btn.reset {
       background-color: red; }
