@@ -187,3 +187,8 @@ elems.pausePlayButton.addEventListener("click", () => {
   }
   pausePlayControl();
 });
+//reset timer
+elems.resetButton.addEventListener("click", () => {
+  resetCounter();
+  pausePlayControl();
+});
