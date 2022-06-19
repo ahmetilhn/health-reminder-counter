@@ -1,11 +1,9 @@
 //timer constant for timer
 let timerConstant = {
   start: false,
-  //type of miliseconds
-  fullDash: 283,
   //Bir insan bilgisayar başında 1 saate 10 dk mola vermelidir
-  timeLimit: 100000,
-  timeLeft: 100000,
+  timeLimit: 10000,
+  timeLeft: 10000,
   //per of second
   per: 1000,
   //timer function
@@ -20,6 +18,10 @@ const colorLimits = {
     color: "orange",
     limit: timerConstant.timeLimit / 2,
   },
+};
+const svgConstants = {
+  //type of miliseconds
+  fullDash: 283,
 };
 //elems(html) of counts
 const elems = {
@@ -43,19 +45,25 @@ const updateCounterCircle = () => {
       timerConstant.timeLeft = timerConstant.timeLeft - timerConstant.per;
       remainingTimeColor(timerConstant.timeLeft);
       remainingTimeText(timerConstant.timeLeft);
-      //set local storage
-      setStorage();
+      // For circle style
       const circleDasharray = `${(
-        calculateTimeFraction() * timerConstant.fullDash
+        calculateTimeFraction() * svgConstants.fullDash
       ).toFixed(0)} 283`;
       elems.counterCircle.setAttribute("stroke-dasharray", circleDasharray);
+      //set local storage
+      setStorage();
     } else {
       resetCounter();
     }
-  }, 1000);
+  }, timerConstant.per);
 };
 //update time circle color
 const remainingTimeColor = (timeLeft) => {
+  //reset circle width
+  elems.counterCircle.setAttribute("stroke-dasharray", svgConstants.fullDash);
+  elems.counterCircle.classList.add("green");
+  elems.counterCircle.classList.remove("orange", "red");
+  elems.counterRipple.classList.remove("orange", "red");
   if (colorLimits.danger.limit > timeLeft) {
     elems.counterCircle.classList.add("red");
     elems.counterRipple.classList.add("red");
@@ -87,37 +95,32 @@ const resetCounter = () => {
   //reset updated variables
   timerConstant = {
     start: false,
-    //type of miliseconds
-    fullDash: 283,
-    timeLimit: 3600000,
-    timeLeft: 3600000,
+    timeLimit: 10000,
+    timeLeft: 10000,
     //per of second
     per: 1000,
     //timer function
     timerInterval: null,
   };
   resetStorage();
-  //reset circle width
-  elems.counterCircle.setAttribute("stroke-dasharray", "283");
-  elems.counterCircle.classList.add("green");
-  elems.counterCircle.classList.remove("orange", "red");
-  elems.counterRipple.classList.remove("orange", "red");
   remainingTimeText(timerConstant.timeLeft);
   remainingTimeColor(timerConstant.timeLeft);
 };
 //set local storage
 const setStorage = () => {
   // Save it using the Chrome extension storage API.
-  chrome.storage.sync.set(
-    { timeLeft: timerConstant.timeLeft, oldDate: new Date().getTime() });
+  chrome.storage.sync.set({
+    timeLeft: timerConstant.timeLeft,
+    oldDate: new Date().getTime(),
+  });
 };
 const getStorage = () => {
   chrome.storage.sync.get(["timeLeft", "oldDate"], (result) => {
-    if(result){
+    if (result) {
       timerConstant.start = true;
-    timerConstant.timeLeft =
-      result.timeLeft - (new Date().getTime() - result.oldDate);
-    initTimer();
+      timerConstant.timeLeft =
+        result.timeLeft - (new Date().getTime() - result.oldDate);
+      initTimer();
     }
   });
 };
@@ -141,4 +144,6 @@ const initTimer = () => {
 // document.addEventListener("DOMContentLoaded", () => {
 //   getStorage();
 // })
+//removed after updated
+resetStorage();
 getStorage();
