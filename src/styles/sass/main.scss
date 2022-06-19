@@ -1,9 +1,8 @@
-
 //imports
-@import "./_colors.scss";
-@import "./_classes.scss";
-@import "./_animations.scss";
-@import url('https://fonts.googleapis.com/css2?family=ZCOOL+QingKe+HuangYou&display=swap');
+@import "./colors.scss";
+@import "./classes.scss";
+@import "./animations.scss";
+@import url("https://fonts.googleapis.com/css2?family=ZCOOL+QingKe+HuangYou&display=swap");
 *,
 body {
   margin: 0;
@@ -12,7 +11,7 @@ body {
   color: $dark-one;
 }
 .app {
-  width: 400px;
+  width: 320px;
   height: 100%;
   border: 2px solid $dark-one;
 }
@@ -23,11 +22,21 @@ body {
 .header {
   width: 100%;
   height: 50px;
-  border-bottom: 1px solid;
+  border-bottom: 2px solid $dark-one;
   padding: 0 10px;
   justify-content: space-between !important;
   &__logo {
     width: 30px;
+  }
+}
+.footer {
+  width: 100%;
+  height: 30px;
+  padding: 0 10px;
+  border-top: 2px solid $gray-one;
+  .author {
+    font-size: 10px;
+    color: $gray-one;
   }
 }
 .counter {
@@ -35,9 +44,9 @@ body {
   width: 140px;
   height: 140px;
   margin: 30px 0;
-  transition: .2s ease;
+  transition: 0.2s ease;
   cursor: pointer;
-  &:hover{
+  &:hover {
     transform: scale(1.1);
   }
   &__ripple {
@@ -47,7 +56,6 @@ body {
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background-color: $green-dark;
     opacity: 0.5;
     animation: rippleEffect 1s ease-out infinite;
     &.green {
@@ -91,7 +99,7 @@ body {
       transition: 0.4s linear all;
       fill-rule: nonzero;
       stroke: $green-dark;
-      fill: $dark-one;
+      fill: $white;
       &.green {
         stroke: $green-dark;
       }
@@ -104,13 +112,28 @@ body {
       }
     }
   }
-  &__remaining-time-text{ 
+  &__remaining-time-text {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    font-family: 'ZCOOL QingKe HuangYou', cursive;
+    font-family: "ZCOOL QingKe HuangYou", cursive;
     font-size: 27px;
-    color: white;
+    color: $dark-one;
+  }
+}
+
+.control-area {
+  width: 100%;
+  padding: 0 10px;
+  justify-content: space-between;
+  .btn {
+    width: 48%;
+    &.stop {
+      background-color: $orange;
+    }
+    &.reset {
+      background-color: $red;
+    }
   }
 }
