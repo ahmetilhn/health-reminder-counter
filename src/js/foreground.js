@@ -27,7 +27,7 @@ const svgConstants = {
 const elems = {
   counterCircle: document.getElementById("counter_path_remaining"),
   startButton: document.getElementById("start_button"),
-  pauseButton: document.getElementById("pause_button"),
+  pausePlayButton: document.getElementById("pause_button"),
   resetButton: document.getElementById("reset_button"),
   timeRemainingText: document.getElementById("time_remaining_text"),
   counterRipple: document.getElementById("counter_ripple"),
@@ -41,7 +41,7 @@ function calculateTimeFraction() {
   );
 }
 //update counter circle width
-const updateCounterCircle = () => {
+const timeInterval = () => {
   timerConstant.timerInterval = setInterval(() => {
     if (timerConstant.timeLeft > 0) {
       timerConstant.timeLeft = timerConstant.timeLeft - timerConstant.per;
@@ -49,7 +49,7 @@ const updateCounterCircle = () => {
       remainingTimeText();
       remainingTimeCircle();
       //set local storage
-      setStorage(timerConstant.timeLeft);
+      setStorage();
     } else {
       resetCounter();
     }
@@ -118,35 +118,35 @@ const setStorage = () => {
   chrome.storage.sync.set({
     timeLeft: timerConstant.timeLeft,
     oldDate: new Date().getTime(),
-    start: timerConstant.start,
+    isPaused: !timerConstant.start,
   });
 };
 const getStorage = () => {
-  chrome.storage.sync.get(["timeLeft", "oldDate"], (result) => {
-    if (result.oldDate) {
-      timerConstant.start = true;
-      timerConstant.timeLeft =
-        result.timeLeft - (new Date().getTime() - result.oldDate);
-      initTimer(timerConstant.timeLeft);
-    } else {
-      console.log("storage yok");
+  chrome.storage.sync.get(["timeLeft", "oldDate", "isPaused"], (result) => {
+    if (result.timeLeft) {
+      if (result.isPaused) {
+        timerConstant.timeLeft = result.timeLeft;
+        timerConstant.start = false;
+      } else {
+        timerConstant.timeLeft =
+          result.timeLeft - (new Date().getTime() - result.oldDate);
+        timerConstant.start = true;
+      }
+      initTimer();
     }
   });
 };
 //start timer after click
 const startTimer = () => {
-  timerConstant.start = true;
-  updateCounterCircle();
+  timeInterval();
 };
 const pauseTimer = () => {
   timerConstant.start = false;
-  elems.pauseButton.innerHTML = "Play";
   window.clearInterval(timerConstant.timerInterval);
   setStorage();
 };
 const playTimer = () => {
   timerConstant.start = true;
-  elems.pauseButton.innerHTML = "Pause";
   startTimer();
 };
 //init timer
@@ -154,22 +154,36 @@ const initTimer = () => {
   remainingTimeCircle();
   remainingTimeText();
   remainingTimeColor();
+  if (timerConstant.start) {
+    startTimer();
+  }
+};
+// pause play control
+const pausePlayControl = () => {
+  if (timerConstant.start) {
+    elems.pausePlayButton.innerText = "Pause";
+  } else {
+    elems.pausePlayButton.innerText = "Play";
+  }
 };
 //after page loaded
 document.addEventListener("DOMContentLoaded", () => {
   getStorage();
+  pausePlayControl();
 });
 //after click starter
 elems.startButton.addEventListener("click", () => {
   if (!timerConstant.start) {
+    timerConstant.start = true;
     startTimer();
   }
 });
-//stop timer
-elems.pauseButton.addEventListener("click", () => {
+//paues and play timer
+elems.pausePlayButton.addEventListener("click", () => {
   if (timerConstant.start) {
     pauseTimer();
   } else {
     playTimer();
   }
+  pausePlayControl();
 });
