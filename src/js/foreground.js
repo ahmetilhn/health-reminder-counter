@@ -27,6 +27,7 @@ const svgConstants = {
 const elems = {
   counterCircle: document.getElementById("counter_path_remaining"),
   startButton: document.getElementById("start_button"),
+  stopButton: document.getElementById("stop_button"),
   timeRemainingText: document.getElementById("time_remaining_text"),
   counterRipple: document.getElementById("counter_ripple"),
 };
@@ -51,7 +52,7 @@ const updateCounterCircle = () => {
       ).toFixed(0)} 283`;
       elems.counterCircle.setAttribute("stroke-dasharray", circleDasharray);
       //set local storage
-      setStorage();
+      setStorage(timerConstant.timeLeft);
     } else {
       resetCounter();
     }
@@ -85,10 +86,6 @@ const remainingTimeText = (time) => {
   }
   elems.timeRemainingText.innerHTML = min + ":" + sec;
 };
-//start timer after click
-const startTimer = () => {
-  updateCounterCircle();
-};
 //reset counter
 const resetCounter = () => {
   window.clearInterval(timerConstant.timerInterval);
@@ -106,17 +103,21 @@ const resetCounter = () => {
   remainingTimeText(timerConstant.timeLeft);
   remainingTimeColor(timerConstant.timeLeft);
 };
+// reset storage
+const resetStorage = () => {
+  chrome.storage.sync.clear();
+};
 //set local storage
-const setStorage = () => {
+const setStorage = (timeLeft) => {
   // Save it using the Chrome extension storage API.
   chrome.storage.sync.set({
-    timeLeft: timerConstant.timeLeft,
+    timeLeft: timeLeft,
     oldDate: new Date().getTime(),
   });
 };
 const getStorage = () => {
   chrome.storage.sync.get(["timeLeft", "oldDate"], (result) => {
-    if (result) {
+    if (result.oldDate) {
       timerConstant.start = true;
       timerConstant.timeLeft =
         result.timeLeft - (new Date().getTime() - result.oldDate);
@@ -124,9 +125,23 @@ const getStorage = () => {
     }
   });
 };
-const resetStorage = () => {
-  chrome.storage.sync.clear();
+//start timer after click
+const startTimer = () => {
+  updateCounterCircle();
 };
+const stopTimer = () => {
+  timerConstant.start = false;
+};
+//init timer
+const initTimer = () => {
+  updateCounterCircle();
+  remainingTimeText(timerConstant.timeLeft);
+  remainingTimeColor(timerConstant.timeLeft);
+};
+//after page loaded
+document.addEventListener("DOMContentLoaded", () => {
+  getStorage();
+});
 //after click starter
 elems.startButton.addEventListener("click", () => {
   if (!timerConstant.start) {
@@ -134,16 +149,3 @@ elems.startButton.addEventListener("click", () => {
     startTimer();
   }
 });
-//init timer
-const initTimer = () => {
-  remainingTimeText(timerConstant.timeLeft);
-  remainingTimeColor(timerConstant.timeLeft);
-  startTimer();
-};
-//after page loaded
-// document.addEventListener("DOMContentLoaded", () => {
-//   getStorage();
-// })
-//removed after updated
-resetStorage();
-getStorage();
