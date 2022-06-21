@@ -1,6 +1,6 @@
 {
   "name": "health-reminder-extension-chrome",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "main": "index.js",
   "scripts": {},
   "repository": "https://github.com/ahmetilhan24/health-reminder-extension-chrome.git",
