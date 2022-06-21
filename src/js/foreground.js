@@ -23,6 +23,26 @@ const svgConstants = {
   //type of miliseconds
   fullDash: 283,
 };
+// Notification schema
+const baseNotification = {
+  type: "basic",
+  iconUrl: "../../assets/img/32.svg",
+};
+// Notification payload
+const endNotification = {
+  ...baseNotification,
+  title: "That's enough work!",
+  message: `Scheduled time exceeded, that's enough work. ${Math.floor(
+    timerConstant.timeLimit / (60 * 1000)
+  )} Minute.`,
+};
+const remainingTimeNotification = {
+  ...baseNotification,
+  title: "Remaining time notification!",
+  message: `Remaining time ${Math.floor(
+    timerConstant.timeLeft / (60 * 1000)
+  )} Minute.`,
+};
 //elems(html) of counts
 const elems = {
   counterCircle: document.getElementById("counter_path_remaining"),
@@ -50,7 +70,12 @@ const timeInterval = () => {
       remainingTimeCircle();
       //set local storage
       setStorage();
+      // Remainin time notification
+      if (timerConstant.timeLeft < colorLimits.danger.limit) {
+        sendNotification(remainingTimeNotification);
+      }
     } else {
+      sendNotification(endNotification);
       resetCounter();
     }
   }, timerConstant.per);
@@ -193,3 +218,10 @@ elems.resetButton.addEventListener("click", () => {
   resetCounter();
   pausePlayControl();
 });
+//Send push notification *{ type, title, message, iconUrl }* => payload
+const sendNotification = (payload) => {
+  chrome.notifications.clear("health_reminder_notification");
+  chrome.notifications.create("health_reminder_notification", payload, () => {
+    console.log("Sended notification");
+  });
+};
