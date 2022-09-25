@@ -11,11 +11,9 @@ With this counter,computer enginers can leave the computer in 50-minute parts. I
 
 ##### Versions
 
-`v1.1.0`
+`v1.0`
 
     Notification (Remaining and end)
-
-`v1.0.0`
 
     Backgorund work
 
@@ -24,3 +22,5 @@ With this counter,computer enginers can leave the computer in 50-minute parts. I
     Time sensitive design
 
 ![alt text](./assets/img/preview.gif)
+
+_Coded by Ahmet ilhan **git@ahmetilhan24**_
