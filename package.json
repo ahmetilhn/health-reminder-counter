@@ -9,7 +9,7 @@
     "worker of computer health reminder"
   ],
   "scripts": {},
-  "repository": "https://github.com/ahmetilhan24/health-reminder-extension-chrome.git",
+  "repository": "https://github.com/ahmetilhan24/health-reminder-counter.git",
   "author": "Ahmet ilhan <ahmetilhan.dev@gmail.com>",
   "license": "MIT",
   "private": false,
