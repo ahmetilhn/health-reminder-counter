@@ -4,11 +4,11 @@
     "description": "With this counter,computer enginers can leave the computer in 50 min parts. It will prevent the harms of continuous work on health.",
     "version": "1.0",
     "icons": {
-        "32": "assets/img/32.png"
+        "32": "img/32.png"
     },
     "action": {
         "default_title": "Health Reminder Counter",
-        "default_popup": "src/views/popup.html"
+        "default_popup": "popup.html"
     },
     "permissions": [
         "storage",
@@ -18,12 +18,12 @@
         "*://*/*"
     ],
     "background": {
-        "service_worker": "src/js/service-worker.js"
+        "service_worker": "service-worker.js"
     },
     "content_scripts": [
         {
             "js": [
-                "src/js/foreground.js"
+                "foreground.js"
             ],
             "matches": [
                 "https://github.com/*"
