@@ -9,16 +9,7 @@ let timerConstant = {
   //timer function
   timerInterval: null,
 };
-const colorLimits = {
-  danger: {
-    color: "red",
-    limit: timerConstant.timeLimit / 4,
-  },
-  info: {
-    color: "orange",
-    limit: timerConstant.timeLimit / 2,
-  },
-};
+let colorLimits;
 const svgConstants = {
   //type of miliseconds
   fullDash: 283,
@@ -51,6 +42,7 @@ const elems = {
   resetButton: document.getElementById("reset_button"),
   timeRemainingText: document.getElementById("time_remaining_text"),
   counterRipple: document.getElementById("counter_ripple"),
+  timeCountSelect: document.getElementById("time_count"),
 };
 
 //calculator stroke dash
@@ -90,18 +82,30 @@ const remainingTimeCircle = () => {
 };
 //update time circle color
 const remainingTimeColor = () => {
-  //reset circle width
-  elems.counterCircle.setAttribute("stroke-dasharray", svgConstants.fullDash);
-  elems.counterCircle.classList.add("green");
-  elems.counterCircle.classList.remove("orange", "red");
-  elems.counterRipple.classList.remove("orange", "red");
-  if (colorLimits.danger.limit > timerConstant.timeLeft) {
-    elems.counterCircle.classList.add("red");
-    elems.counterRipple.classList.add("red");
-  } else if (colorLimits.info.limit > timerConstant.timeLeft) {
-    elems.counterRipple.classList.add("orange");
-    elems.counterCircle.classList.add("orange");
-  }
+  colorLimits = {
+    danger: {
+      color: "red",
+      limit: timerConstant.timeLimit / 4,
+    },
+    info: {
+      color: "orange",
+      limit: timerConstant.timeLimit / 2,
+    },
+  };
+  setTimeout(() => {
+    //reset circle width
+    elems.counterCircle.setAttribute("stroke-dasharray", svgConstants.fullDash);
+    elems.counterCircle.classList.add("green");
+    elems.counterCircle.classList.remove("orange", "red");
+    elems.counterRipple.classList.remove("orange", "red");
+    if (colorLimits.danger.limit > timerConstant.timeLeft) {
+      elems.counterCircle.classList.add("red");
+      elems.counterRipple.classList.add("red");
+    } else if (colorLimits.info.limit > timerConstant.timeLeft) {
+      elems.counterRipple.classList.add("orange");
+      elems.counterCircle.classList.add("orange");
+    }
+  }, 1000);
 };
 
 const remainingTimeText = () => {
@@ -122,14 +126,14 @@ const resetCounter = () => {
   //reset updated variables
   timerConstant = {
     start: false,
-    timeLimit: 3000000,
-    timeLeft: 3000000,
+    timeLimit: timerConstant.timeLimit,
+    timeLeft: timerConstant.timeLimit,
     //per of second
     per: 1000,
     //timer function
     timerInterval: null,
   };
-  resetStorage();
+  setStorage();
   remainingTimeText();
   remainingTimeColor();
 };
@@ -141,25 +145,30 @@ const resetStorage = () => {
 const setStorage = () => {
   // Save it using the Chrome extension storage API.
   chrome.storage.sync.set({
+    timeLimit: timerConstant.timeLimit,
     timeLeft: timerConstant.timeLeft,
     oldDate: new Date().getTime(),
     isPaused: !timerConstant.start,
   });
 };
 const getStorage = () => {
-  chrome.storage.sync.get(["timeLeft", "oldDate", "isPaused"], (result) => {
-    if (result.timeLeft) {
-      if (result.isPaused) {
-        timerConstant.timeLeft = result.timeLeft;
-        timerConstant.start = false;
-      } else {
-        timerConstant.timeLeft =
-          result.timeLeft - (new Date().getTime() - result.oldDate);
-        timerConstant.start = true;
+  chrome.storage.sync.get(
+    ["timeLeft", "oldDate", "isPaused", "timeLimit"],
+    (result) => {
+      if (result.timeLeft) {
+        if (result.isPaused) {
+          timerConstant.timeLeft = result.timeLeft;
+          timerConstant.start = false;
+        } else {
+          timerConstant.timeLeft =
+            result.timeLeft - (new Date().getTime() - result.oldDate);
+          timerConstant.start = true;
+        }
+        timerConstant.timeLimit = result.timeLimit;
+        initTimer();
       }
-      initTimer();
     }
-  });
+  );
 };
 //start timer after click
 const startTimer = () => {
@@ -180,6 +189,7 @@ const initTimer = () => {
   remainingTimeCircle();
   remainingTimeText();
   remainingTimeColor();
+  elems.timeCountSelect.value = timerConstant.timeLimit / 1000 / 60;
   if (timerConstant.start) {
     startTimer();
   }
@@ -217,6 +227,15 @@ elems.pausePlayButton.addEventListener("click", () => {
 elems.resetButton.addEventListener("click", () => {
   resetCounter();
   pausePlayControl();
+});
+// update time count
+elems.timeCountSelect.addEventListener("change", (e) => {
+  timerConstant.timeLimit = e.target.value * 1000 * 60;
+  timerConstant.timeLeft = e.target.value * 1000 * 60;
+  setStorage();
+  remainingTimeCircle();
+  remainingTimeColor();
+  remainingTimeText();
 });
 //Send push notification *{ type, title, message, iconUrl }* => payload
 const sendNotification = (payload) => {
