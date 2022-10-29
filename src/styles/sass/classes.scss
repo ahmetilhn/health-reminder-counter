@@ -18,3 +18,14 @@
   font-size: 15px;
   cursor: pointer;
 }
+
+.select {
+  display: block;
+  border: 2px solid $dark-two;
+  box-sizing: border-box;
+  height: 41px;
+  border-radius: 4px;
+  color: $dark-one;
+  font-size: 15px;
+  padding-left: 3px;
+}

@@ -128,12 +128,15 @@ body {
   padding: 0 10px;
   justify-content: space-between;
   .btn {
-    width: 48%;
+    width: 39%;
     &.pause {
       background-color: $orange;
     }
     &.reset {
       background-color: $red;
     }
+  }
+  .time-count {
+    width: 17%;
   }
 }

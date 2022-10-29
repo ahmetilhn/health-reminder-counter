@@ -1,7 +1,7 @@
 "use strict";
 
 const gulp = require("gulp");
-const sass = require("gulp-sass");
+const sass = require("gulp-sass")(require("sass"));
 //sass convertor and watch
 gulp.task("sass", () => {
   return gulp
