@@ -9,6 +9,8 @@ With this counter,computer enginers can leave the computer in 50-minute parts. I
 - Reset - Pause - Play - Start functions
 - Time sensitive design
 
+![alt text](./static/img/preview.gif)
+
 ##### Versions
 
 `v1.0`
@@ -21,6 +23,8 @@ With this counter,computer enginers can leave the computer in 50-minute parts. I
 
     Time sensitive design
 
-![alt text](./assets/img/preview.gif)
+`v1.1`
+
+    Customable time
 
 _Coded by Ahmet ilhan **git@ahmetilhan24**_
