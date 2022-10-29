@@ -1,7 +1,8 @@
 const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
-  mode: "development",
+  mode: process.env.NODE_ENV,
   entry: {
     foreground: "./src/js/foreground.js",
     "service-worker": "./src/js/service-worker.js",
@@ -25,8 +26,19 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
   },
   plugins: [
+    new HtmlWebpackPlugin({
+      template: "./static/popup.html",
+      filename: "popup.html",
+      templateParameters: {
+        cssRootDir:
+          process.env.NODE_ENV === "production" ? "./css" : "./src/styles/css",
+      },
+    }),
     new CopyPlugin({
-      patterns: [{ from: "./static" }, { from: "./src/styles/css", to: "css" }],
+      patterns: [
+        { from: "./static/img", to: "img" },
+        { from: "./src/styles/css", to: "css" },
+      ],
     }),
   ],
 };
