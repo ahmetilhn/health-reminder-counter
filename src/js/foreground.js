@@ -17,7 +17,7 @@ const svgConstants = {
 // Notification schema
 const baseNotification = {
   type: "basic",
-  iconUrl: "../../assets/img/32.svg",
+  iconUrl: "img/32.svg",
 };
 // Notification payload
 const endNotification = {
@@ -46,12 +46,12 @@ const elems = {
 };
 
 //calculator stroke dash
-function calculateTimeFraction() {
+const calculateTimeFraction = () => {
   const rawTimeFraction = timerConstant.timeLeft / timerConstant.timeLimit;
   return (
     rawTimeFraction - (1 / timerConstant.timeLimit) * (1 - rawTimeFraction)
   );
-}
+};
 //update counter circle width
 const timeInterval = () => {
   timerConstant.timerInterval = setInterval(() => {
@@ -78,7 +78,7 @@ const remainingTimeCircle = () => {
   const circleDasharray = `${(
     calculateTimeFraction() * svgConstants.fullDash
   ).toFixed(0)} ${svgConstants.fullDash}`;
-  elems.counterCircle.setAttribute("stroke-dasharray", circleDasharray);
+    elems.counterCircle.setAttribute("stroke-dasharray", circleDasharray);
 };
 //update time circle color
 const remainingTimeColor = () => {
