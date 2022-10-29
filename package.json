@@ -8,13 +8,21 @@
     "developer health reminder",
     "worker of computer health reminder"
   ],
-  "scripts": {},
+  "scripts": {
+    "build": "webpack build"
+  },
   "repository": "https://github.com/ahmetilhan24/health-reminder-counter.git",
   "author": "Ahmet ilhan <ahmetilhan.dev@gmail.com>",
   "license": "MIT",
   "private": false,
   "devDependencies": {
+    "@babel/core": "^7.19.6",
+    "@babel/preset-env": "^7.19.4",
+    "babel-loader": "^9.0.0",
+    "copy-webpack-plugin": "^11.0.0",
     "gulp": "^4.0.2",
-    "gulp-sass": "^5.1.0"
+    "gulp-sass": "^5.1.0",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0"
   }
 }
