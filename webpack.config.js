@@ -1,6 +1,7 @@
 const path = require("path");
 const CopyPlugin = require("copy-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const packageJson = require("./package.json");
 module.exports = {
   mode: process.env.NODE_ENV,
   entry: {
@@ -32,6 +33,7 @@ module.exports = {
       templateParameters: {
         cssRootDir:
           process.env.NODE_ENV === "production" ? "./css" : "./src/styles/css",
+        appVersion: packageJson.version,
       },
     }),
     new CopyPlugin({
